@@ -2,11 +2,6 @@ package com.horizon.algorithm;
 
 /**
  * @author : DavidSoong
- * @company : www.1289.com
- * @department : JAVA工程师
- * @date : 2015年6月3日 下午8:58:13
- * @see
- * @since : 1.0.0
  */
 public class KeepCPU {
 
