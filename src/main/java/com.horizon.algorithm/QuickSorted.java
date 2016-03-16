@@ -1,38 +1,43 @@
 package com.horizon.algorithm;
 
+/**
+ * 算法概述/思路
+ 快速排序一般基于递归实现。其思路是这样的：
+ 1.选定一个合适的值（理想情况中值最好，但实现中一般使用数组第一个值）,称为“枢轴”(pivot)。
+ 2.基于这个值，将数组分为两部分，较小的分在左边，较大的分在右边。
+ 3.可以肯定，如此一轮下来，这个枢轴的位置一定在最终位置上。
+ 4.对两个子数组分别重复上述过程，直到每个数组只有一个元素。
+ 5.排序完成
+ */
 public class QuickSorted {
 
-	public static void quickSort(int[] list) {
-		quickSort(list, 0, list.length - 1);
+	public static void quickSort(int[] arr){
+		qsort(arr, 0, arr.length-1);
 	}
-
-	private static void quickSort(int[] list, int first, int high) {
-		if (high > first) {
-			int keyIndex = partition(list, first, high);
-			quickSort(list, 0, keyIndex - 1);
-			quickSort(list, keyIndex + 1, high);
+	private static void qsort(int[] arr, int low, int high){
+		if (low < high){
+			int pivot=partition(arr, low, high);        //将数组分为两部分
+			qsort(arr, low, pivot-1);                   //递归排序左子数组
+			qsort(arr, pivot+1, high);                  //递归排序右子数组
 		}
 	}
+	private static int partition(int[] arr, int low, int high){
+		int pivot = arr[low];     //枢轴记录
+		while (low<high){
+			while (low<high && arr[high]>=pivot) --high;
+				arr[low]=arr[high];             //交换比枢轴小的记录到左端
 
-	private static int partition(int[] list, int low, int high) {
-		int privotKey = list[low];
-		while (high > low) {
-			while(low < high && list[high] >= privotKey) {
-				high--;
-			}
-			list[low] = list[high];
-			
-			while(low < high && list[low] <= privotKey) {
-				low++;
-			}
-			list[high] = list[low];
+			while (low<high && arr[low]<=pivot) ++low;
+				arr[high] = arr[low];           //交换比枢轴大的记录到右端
 		}
-		list[low] = privotKey;
+		//扫描完成，枢轴到位
+		arr[low] = pivot;
+		//返回的是枢轴的位置
 		return low;
 	}
+
 	public static void main(String[] args) {
-		
-		int[] list = {3,7,3,22,44,44,5} ;
+		int[] list = {5,3,6,2,1,9,4,8,7} ;
 		quickSort(list);
 		for(int temp : list){
 			System.out.print(temp +" ");

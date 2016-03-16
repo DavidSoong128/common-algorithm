@@ -22,7 +22,6 @@ public class MergeSorted {
 		int curIndex1 = 0 ;
 		int curIndex2 = 0 ;
 		int curIndex3 = 0 ;
-		
 		while(curIndex1 <  halfLeft.length && curIndex2 < halfRight.length){
 			if(halfLeft[curIndex1] < halfRight[curIndex2]){
 				temp[curIndex3++] = halfLeft[curIndex1 ++] ;
@@ -30,19 +29,16 @@ public class MergeSorted {
 				temp[curIndex3++] = halfRight[curIndex2 ++] ;
 			}
 		}
-		
 		while(curIndex1 < halfLeft.length) {
 			temp[curIndex3++] = halfLeft[curIndex1 ++] ;
 		}
 		while(curIndex2 < halfRight.length){
 			temp[curIndex3++] = halfRight[curIndex2 ++] ;
 		}
-		
 		return temp;
 	}
 	
 	public static void main(String[] args) {
-		
 		int[] list = {3,7,3,22,44,1,1} ;
 		mergeSort(list);
 		for(int temp : list){
